@@ -88,7 +88,7 @@ def iniciar():
                 admin = True
             if adminL == 'SADMIN':
                 superAdmin = True
-            inicioS = True  
+            inicioS = True
             return redirect(url_for('productos'))
         return render_template('iniciar.html', inicioS=inicioS)
     except Exception as e:
@@ -144,7 +144,7 @@ def load_logged_in_user():
     else:
         db = get_db()
         g.user = db.execute(
-            'SELECT * FROM usuarios WHERE id = ?', (user_id, )).fetchone()
+            'SELECT * FROM usuarios WHERE id_usuario = ?', (user_id, )).fetchone()
 
 
 @app.route('/registro', methods=['GET', 'POST'])
@@ -258,7 +258,7 @@ def recuperar():
                 flash(error)
                 return render_template('recuperar.html')
             exito = True
-            recuperar=True
+            recuperar = True
             flash('Hemos enviado un mensaje a su correo')
             yag.send(to=email, subject=tema_recupera,
                      contents=recupera_contenido)
@@ -272,13 +272,14 @@ def recuperar():
 def habitacion():
     return render_template('habitacion.html', inicioS=inicioS)
 
-@app.route('/restablecer', methods=['GET','POST'])
+
+@app.route('/restablecer', methods=['GET', 'POST'])
 def restablecer():
     try:
         if request.method == 'POST':
             db = get_db()
             db.execute()
-                        #'UPDATE usuarios SET password = :nueva WHERE id_usuario = :id', {"nueva": disponibilidad, "id":id_u})
+            # 'UPDATE usuarios SET password = :nueva WHERE id_usuario = :id', {"nueva": disponibilidad, "id":id_u})
             db.commit()
             db.close()
     except Exception as e:
@@ -289,14 +290,15 @@ def restablecer():
 @app.route('/productos', methods=['POST', 'GET'])
 def productos():
     lista_productos = {"pro1": {"nombre": "Tomate", "descripcion": "Tomate rojo vendido por libre", "precio": 1800, "imagen": "../static/img/tomate.jpg", "cod": "pro1"},
-                   "pro2": {"nombre": "Cebolla", "descripcion": "Cebollla cabezona vendida por libra", "precio": 1700, "imagen": "../static/img/cebolla.jpg", "cod": "pro2"},
-                   "pro3": {"nombre": "Papa", "descripcion": "Papa pastusa vendida por libra", "precio": 1450, "imagen": "../static/img/papa.jpg", "cod": "pro3"},
-                   "pro4": {"nombre": "Yuca", "descripcion": "Yuca de la buena vendida por libra", "precio": 900, "imagen": "../static/img/yuca.jpg", "cod": "pro4"},
-                   "pro5": {"nombre": "Cilantro", "descripcion": "Cilantro para el caldo vendida por libra", "precio": 500, "imagen": "../static/img/cilantro.jpg", "cod": "pro5"}}
+                       "pro2": {"nombre": "Cebolla", "descripcion": "Cebollla cabezona vendida por libra", "precio": 1700, "imagen": "../static/img/cebolla.jpg", "cod": "pro2"},
+                       "pro3": {"nombre": "Papa", "descripcion": "Papa pastusa vendida por libra", "precio": 1450, "imagen": "../static/img/papa.jpg", "cod": "pro3"},
+                       "pro4": {"nombre": "Yuca", "descripcion": "Yuca de la buena vendida por libra", "precio": 900, "imagen": "../static/img/yuca.jpg", "cod": "pro4"},
+                       "pro5": {"nombre": "Cilantro", "descripcion": "Cilantro para el caldo vendida por libra", "precio": 500, "imagen": "../static/img/cilantro.jpg", "cod": "pro5"}}
     productos = []
     for pro in lista_productos.items():
         productos.append(pro[1])
     return render_template("productos.html", productos=productos, inicioS=inicioS)
+
 
 @app.route('/calificacion', methods=['GET', 'POST'])
 @login_required
@@ -377,21 +379,26 @@ def comentarios():
         flash(e)
     return render_template('comentarios.html', inicioS=inicioS)
 
-@app.route('/cambiar', methods=['GET','POST'])
+
+@app.route('/cambiar', methods=['GET', 'POST'])
 def cambiar():
     return render_template('cambiar.html')
-    
-@app.route('/perfil', methods=['GET','POST'])
+
+
+@app.route('/perfil', methods=['GET', 'POST'])
 def perfil():
     return render_template('perfil.html')
 
-@app.route('/listaDeseos', methods=['GET','POST'])
+
+@app.route('/listaDeseos', methods=['GET', 'POST'])
 def listaDeseos():
     return render_template('listaDeseos.html')
 
-@app.route('/carrito', methods=['GET','POST'])
+
+@app.route('/carrito', methods=['GET', 'POST'])
 def carrito():
     return render_template('carrito.html')
+
 
 @app.route('/herramientas', methods=['GET'])
 @admin_required
