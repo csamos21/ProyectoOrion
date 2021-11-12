@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Iniciar sesion{% endblock %}
+{% block estilo %}
+<link rel="stylesheet" href="/static/css/IniciarSesion.css" media=" screen"> {% endblock %}
+{% block contenido %}
+<section class="u-align-center u-clearfix u-grey-10 u-section-1" id="sec-806e">
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  {%for message in messages %}
+  <div class="alert alert-danger ">{{message}}</div>
+  {% endfor%}
+  </ul>
+  {% endif %}
+  {% endwith %}
+  <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+    <div class="u-container-style u-group u-radius-50 u-shape-round u-white u-group-1">
+      <div class="u-container-layout u-container-layout-1">
+        <h3 class="u-align-center u-text u-text-default u-text-1">Iniciar sesión</h3>
+        <div class="u-form u-form-1">
+          <form action="{{url_for('iniciar')}}" method="POST" class="u-clearfix u-form-spacing-15  u-inner-form"
+            style="padding: 15px;" source="custom" name="form">
+            <div class="u-form-group u-form-name">
+              <label for="usuario" class="u-form-control-hidden u-label">Name</label>
+              <input type="text" placeholder="Introduzca su nombre de usuario" id="usuario" name="usuario"
+                class="mb-3 u-border-1 u-border-grey-30 u-input u-input-rectangle">
+            </div>
+            <div class="u-form-group">
+              <label for="password" class="u-form-control-hidden u-label">Email</label>
+              <input type="password" placeholder="Contraseña" id="password" name="password"
+                class="u-border-1 u-border-grey-30 u-input u-input-rectangle">
+            </div>
+            <div class="u-align-left u-form-group u-form-submit">
+              <input type="submit" value="Ingresar" class="u-btn u-btn-submit u-button-style">
+            </div>
+          </form>
+        </div>
+        <a href="recuperar" data-page-id="689800734"
+          class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-login-control u-login-forgot-password u-none u-text-palette-1-base u-btn-2">Olvide
+          mi contraseña</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

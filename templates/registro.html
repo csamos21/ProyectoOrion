@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}Registro{% endblock %}
+{% block estilo %}
+<link rel="stylesheet" href="/static/css/Registro.css" media=" screen"> {% endblock %}
+{% block contenido %}
+<section class="u-align-center u-clearfix u-grey-10 u-section-1" id="sec-806e">
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  {%for message in messages %}
+  <div class="alert alert-danger ">{{message}}</div>
+  {% endfor%}
+  </ul>
+  {% endif %}
+  {% endwith %}
+  <div class="u-clearfix u-sheet u-sheet-1">
+    <div class="u-align-center u-container-style u-group u-radius-50 u-shape-round u-white u-group-1">
+      <div class="u-container-layout u-container-layout-1">
+        <h3 class="u-text u-text-default u-text-1">Crear una cuenta</h3>
+        <div class="u-form u-form-1">
+          <form name="formulario" method="post" action="{{url_for('registro')}}"
+            class=" u-clearfix u-form-spacing-10 u-inner-form" style="padding: 5px;">
+            <div class="u-form-group">
+              <label for="nombre" class="u-label"></label>
+              <input type="text" placeholder="Nombre sin espacios" id="nombre" name="nombre"
+                class="mb-3 u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+            </div>
+            <div class="u-form-group u-form-partition-factor-2 u-form-select u-form-group-2">
+              <label for="tipo" class="u-label">Tipo de documento</label>
+              <div class="u-form-select-wrapper">
+                <select id="tipo" name="tipo"
+                  class="mb-3 u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                  <option value="Cedula de ciudadanía">Cedula de ciudadanía</option>
+                  <option value="Pasaporte">Pasaporte</option>
+                  <option value="Cedula de extranjería">Cedula de extranjería</option>
+                </select>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret">
+                  <path fill="currentColor" d="M4 8L0 4h8z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="u-form-group u-form-partition-factor-2 u-form-select u-form-group-3">
+              <label for="pais" class="u-label">Pais</label>
+              <div class="u-form-select-wrapper">
+                <select id="pais" name="pais" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                  <option value="Colombia">Colombia</option>
+                  <option value="Argentina">Argentina</option>
+                  <option value="Chile">Chile</option>
+                  <option value="Ecuador">Ecuador</option>
+                  <option value="Venezuela">Venezuela</option>
+                  <option value="Peru">Peru</option>
+                  <option value="Bolivia">Bolivia</option>
+                  <option value="Brasil">Brasil</option>
+                </select>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret">
+                  <path fill="currentColor" d="M4 8L0 4h8z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="u-form-group u-form-name">
+              <label for="numero" class="u-label"></label>
+              <input type="text" placeholder="Número de documento" id="numero" name="numero"
+                class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+            </div>
+            <div class="u-form-group">
+              <label for="email" class="u-label"></label>
+              <input type="text" placeholder="Email" id="email" name="email"
+                class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+            </div>
+            <div class="u-form-group u-form-group-3">
+              <label for="contrasena" class="u-label"></label>
+              <input type="password" placeholder="Contraseña, use simbolos y numeros" id="contrasena" name="contrasena"
+                class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+            </div>
+            <div class="u-form-group u-form-group-4">
+              <label for="confirma" class="u-label"></label>
+              <input type="password" placeholder="Confirmar contraseña" id="confirma" name="confirma"
+                class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+            </div>
+            <div class="u-form-group u-form-group-5">
+              <label for="telefono" class="u-label"></label>
+              <input type="text" placeholder="Ingrese su teléfono (por ejemplo, +578144914571)" id="telefono"
+                name="telefono" class="mb-3 u-border-1 u-border-grey-30 u-input u-input-rectangle u-white ">
+            </div>
+            <div class="u-form-agree u-form-group u-form-group-6">
+              <input type="checkbox" id="terminos" name="terminos" class="u-agree-checkbox">
+              <label for="terminos" class="u-label">Acepto los términos y condiciones</label>
+            </div>
+            <div class="u-align-left u-form-group u-form-submit">
+              <input type="submit" value="Registrarme" class="u-btn u-btn-submit u-button-style">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

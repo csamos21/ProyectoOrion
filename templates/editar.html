@@ -1,0 +1,81 @@
+{% extends "baseA.html" %}
+{% block title %}Editar{% endblock %}
+{% block estilo %}
+<link rel="stylesheet" href="/static/css/Editar.css" media=" screen"> {% endblock %}
+{% block contenido %}
+<section class="u-align-center u-clearfix u-section-1" id="sec-9642">
+
+  <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+    <div class="u-align-left u-container-style u-group u-group-1">
+      <div class="u-container-layout u-container-layout-1">
+        <h2 class="u-text u-text-default u-text-1">Editar</h2>
+        <div class="u-border-3 u-border-grey-dark-1 u-line u-line-horizontal u-line-1"></div>
+        <div class="u-form u-form-1">
+          <form action="{{url_for('editar')}}" method="POST" class="u-clearfix u-form-spacing-15 u-inner-form"
+            style="padding: 15px;" source="custom" name="form">
+
+            <div class="u-form-group u-form-partition-factor-2 u-form-textarea u-form-group-2">
+              <label for="estado" class="u-label">Habitación-Estado</label>
+              <textarea rows="10" cols="50" id="estado" name="estado"
+                class="u-border-1 u-border-grey-30 u-input u-input-rectangle">
+                  {% with messages = get_flashed_messages(category_filter=["info"]) %}
+                  {% if messages %}
+                    {%for message in messages %}
+                  {{message}}
+                    {% endfor%}
+                  {% endif %}
+                  {% endwith %}
+                </textarea>
+            </div>
+            <div class="u-align-center u-form-group u-form-submit">
+              <a href="#" class="u-btn u-btn-submit u-button-style">Consulta<br>
+              </a>
+              <input type="submit" value="submit" class="u-form-control-hidden">
+            </div>
+          </form>
+        </div>
+        <div class="u-form u-form-2">
+          <form action="{{url_for('editar')}}" method="POST" class="u-clearfix u-form-spacing-15 u-inner-form"
+            style="padding: 15px;" source="custom" name="form">
+            <div class="u-form-group u-form-group-4">
+              <label for="id" class="u-form-control-hidden u-label"></label>
+              <input type="text" placeholder="Identificador de la habitación" id="id" name="id"
+                class="mb-3 u-border-1 u-border-grey-30 u-input u-input-rectangle">
+            </div>
+            <div class="u-form-group u-form-group-5">
+              <label for="nombre" class="u-form-control-hidden u-label"></label>
+              <input type="text" placeholder="Ingrese el nuevo nombre(opcional)" id="nombre" name="nombre"
+                class="mb-3 u-border-1 u-border-grey-30 u-input u-input-rectangle">
+            </div>
+            <div class="u-form-group u-form-select u-form-group-6">
+              <label for="disponibilidad" class="u-label">Estado</label>
+              <div class="u-form-select-wrapper">
+                <select id="disponibilidad" name="disponibilidad"
+                  class="u-border-1 u-border-grey-30 u-input u-input-rectangle">
+                  <option value="Disponible">Disponible</option>
+                  <option value="Ocupada">Ocupada</option>
+                </select>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret">
+                  <path fill="currentColor" d="M4 8L0 4h8z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="u-align-center u-form-group u-form-submit">
+              <a href="#" class="u-btn u-btn-submit u-button-style">Editar<br>
+              </a>
+              <input type="submit" value="submit" class="u-form-control-hidden">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% with messages = get_flashed_messages(category_filter=["success"]) %}
+{% if messages %}
+{%for message in messages %}
+<div class="alert alert-success text-center">{{message}}</div>
+{% endfor%}
+{% endif %}
+{% endwith %}
+{% endblock %}
