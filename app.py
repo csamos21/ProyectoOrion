@@ -304,10 +304,26 @@ def crud_productos():
         cursor.execute(sql)
         productos = cursor.fetchall()
         close_db()
-        return render_template("show_prod.html", inicioS=inicioS, productos=productos, rol_user=rol_user)
+        return render_template("crud_prod.html", inicioS=inicioS, productos=productos, rol_user=rol_user)
     else:
         return render_template('index.html', inicioS=inicioS, usuario=g.user)
 
+@app.route("/show_productos", methods=["GET", "POST"])
+def show_productos():
+    global rol_user
+    if g.user:  
+        # si ya inicio sesion
+        # chequear el perfil
+        # segun el perfil lo envia a la pagina segun Mapa de Navegabilidad
+        sql = "Select * from productos"
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute(sql)
+        productos = cursor.fetchall()
+        close_db()
+        return render_template("show_prod.html", inicioS=inicioS, productos=productos, rol_user=rol_user)
+    else:
+        return render_template('index.html', inicioS=inicioS, usuario=g.user)
 
 @app.route('/productos', methods=['POST', 'GET'])
 def productos():

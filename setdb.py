@@ -59,10 +59,11 @@ CREATE TABLE productos(
   tipo_unidad CHAR(2) NOT NULL DEFAULT 01, 
   valor_unitario DOUBLE NOT NULL DEFAULT 0, 
   calificacion_producto INT NOT NULL DEFAULT 5, 
-  descuento CHAR(1) NOT NULL DEFAULT 0, 
+  descuento CHAR(1) NOT NULL DEFAULT 0,
+  porcentaje_dcto DOUBLE(5, 2) NOT NULL DEFAULT (0.00),
   comentarios TEXT,
   fecha_sistema datetime DEFAULT CURRENT_TIMESTAMP
-  );    
+  );  
     """)
 except Exception as e:
     print(e)
