@@ -46,7 +46,7 @@ def inicio():
 
 
 @app.route('/iniciar', methods=['POST', 'GET'])
-def iniciar():
+def iniciar(): 
     global inicioS
     global admin
     global superAdmin
@@ -64,12 +64,14 @@ def iniciar():
                 error = 'Debes ingresar una contraseña'
                 flash(error)
                 return render_template('iniciar.html')
+
             db = get_db()
             user = db.execute(
-                'SELECT * FROM usuarios WHERE nombre_usuario= ?', (username, )).fetchone()
+                'SELECT * FROM usuarios WHERE codigo_usuario= ?', (username, )).fetchone()
             db.close()
+
             if user is None:
-                error = 'Usuario o contraseña inválidos'
+                error = 'No se encontró Usuario con ese codigo'
                 flash(error)
                 return render_template('iniciar.html')
             else:
@@ -83,13 +85,13 @@ def iniciar():
                     session.clear()
                     inicioS = False
                     session['user_id'] = user[0]
-            adminL = user[6]
-            if adminL == 'USER':
-                admin = True
-            if adminL == 'SADMIN':
-                superAdmin = True
-            inicioS = True
-            return redirect(url_for('productos'))
+                    adminL = user[6]
+                    if adminL == 'USER':
+                        admin = True
+                    if adminL == 'SADMIN':
+                        superAdmin = True
+                    inicioS = True
+                    return redirect(url_for('productos'))
         return render_template('iniciar.html', inicioS=inicioS)
     except Exception as e:
         return render_template('iniciar.html')
