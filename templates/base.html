@@ -49,29 +49,36 @@
                 <div class="u-custom-menu u-nav-container">
                     <ul class="u-nav u-spacing-2 u-unstyled u-nav-1">
                         {% if inicioS %}
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/"
-                                style="padding: 10px 20px;">Inicio</a>
-                        </li>
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link" href="productos"
-                                style="padding: 10px 20px;">Productos</a>
-                        </li>
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link" href="salir"
-                                style="padding: 10px 20px;">Cerrar
-                                Sesion</a>
-                        </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/"
+                                    style="padding: 10px 20px;">Inicio</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="productos"
+                                    style="padding: 10px 20px;">Productos</a>
+                                    <ul class="list__show">
+                                        {% if rol_user != "USER" %}
+                                            <li class="list__inside">
+                                                <a href="{{ url_for('crud_productos') }}" class="nav__link nav__link--inside">Mostrar Productos</a>
+                                            </li>
+                                        {% endif %}  
+                                    </ul>                                    
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="salir"
+                                    style="padding: 10px 20px;">Cerrar
+                                    Sesion</a>
+                            </li>
                         {% else %}
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/"
-                                style="padding: 10px 20px;">Inicio</a>
-                        </li>
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link" href="productos"
-                                style="padding: 10px 20px;">Productos</a>
-                        </li>
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link" href="registro"
-                                style="padding: 10px 20px;">Crear una cuenta</a>
-                        </li>
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link" href="iniciar"
-                                style="padding: 10px 20px;">Iniciar sesión</a>
-                        </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/"
+                                    style="padding: 10px 20px;">Inicio</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="productos"
+                                    style="padding: 10px 20px;">Productos</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="registro"
+                                    style="padding: 10px 20px;">Crear una cuenta</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="iniciar"
+                                    style="padding: 10px 20px;">Iniciar sesión</a>
+                            </li>
                         {% endif %}
                     </ul>
                 </div>

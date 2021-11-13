@@ -5,7 +5,7 @@ import yagmail
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import utils
-from db import get_db
+from db import get_db, close_db # incluir close_db
 import functools
 from forms import NuevoProducto
 
@@ -36,6 +36,7 @@ app.secret_key = os.urandom(12)
 inicioS = False
 admin = False
 superAdmin = False
+rol_user = "None"
 
 
 @app.route('/', methods=['GET'])
@@ -47,7 +48,7 @@ def inicio():
 
 @app.route('/iniciar', methods=['POST', 'GET'])
 def iniciar(): 
-    global inicioS
+    global inicioS, rol_user
     global admin
     global superAdmin
     try:
@@ -84,7 +85,8 @@ def iniciar():
                 else:
                     session.clear()
                     inicioS = False
-                    session['user_id'] = user[0]
+                    session['user_id'] = user[0] 
+                    rol_user = user[6]
                     adminL = user[6]
                     if adminL == 'USER':
                         admin = True
@@ -287,6 +289,24 @@ def restablecer():
     except Exception as e:
         return render_template('restablecer.html')
     return render_template('restablecer.html')
+
+
+@app.route("/crud_productos", methods=["GET", "POST"])
+def crud_productos():
+    global rol_user
+    if g.user:  
+        # si ya inicio sesion
+        # chequear el perfil
+        # segun el perfil lo envia a la pagina segun Mapa de Navegabilidad
+        sql = "Select * from productos"
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute(sql)
+        productos = cursor.fetchall()
+        close_db()
+        return render_template("show_prod.html", inicioS=inicioS, productos=productos, rol_user=rol_user)
+    else:
+        return render_template('index.html', inicioS=inicioS, usuario=g.user)
 
 
 @app.route('/productos', methods=['POST', 'GET'])

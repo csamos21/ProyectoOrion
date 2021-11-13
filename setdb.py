@@ -53,14 +53,16 @@ try:
 CREATE TABLE productos(
   id_producto INTEGER PRIMARY KEY AutoIncrement, 
   cod_producto VARCHAR(10) NOT NULL UNIQUE ON CONFLICT ROLLBACK, 
-  name_producto VARCHAR(255) NOT NULL, 
+  nombre VARCHAR(255) NOT NULL, 
+  descripcion TEXT,
+  imagen VARCHAR(255) NOT NULL DEFAULT "../static/img/None.png",
   tipo_unidad CHAR(2) NOT NULL DEFAULT 01, 
   valor_unitario DOUBLE NOT NULL DEFAULT 0, 
   calificacion_producto INT NOT NULL DEFAULT 5, 
   descuento CHAR(1) NOT NULL DEFAULT 0, 
   comentarios TEXT,
   fecha_sistema datetime DEFAULT CURRENT_TIMESTAMP
-  );
+  );    
     """)
 except Exception as e:
     print(e)
@@ -136,15 +138,15 @@ except Exception as e:
 
 try: 
     pibote.execute("""
-insert into productos (cod_producto, name_producto, tipo_unidad, valor_unitario, calificacion_producto, descuento, comentarios)
-Values ('001', 'Orion-SHOCK', 'PZA' , 125000, 5, 1, ""), ('100', 'TREX-Orion', 'PZA' , 125000, 5, 1, ""),
-       ('011', 'Orion-GAMER', 'PZA' , 125000, 5, 1, "") ,('101', 'BLACK-Orion', 'KIT' , 125000, 5, 1, ""),
-       ('021', 'Orion-SHOOT', 'PZA' , 125000, 5, 1, "") ,('111', 'ORANGE-Orion', 'PZA' , 125000, 5, 1, ""),
-       ('031', 'Orion-KSIUS', 'KIT' , 125000, 5, 1, "") ,('121', 'SHOW-Orion', 'PZA' , 125000, 5, 1, ""),
-       ('041', 'Orion-MOON', 'PZA' , 125000, 5, 1, "") ,('131', 'WATER-Orion', 'PZA' , 125000, 5, 1, ""),
-       ('051', 'Orion-DREAM', 'PZA' , 125000, 5, 1, "") ,('141', 'SPLASH-Orion-SHOCK', 'PZA' , 125000, 5, 1, ""),
-       ('061', 'Orion-TEAM', 'PCK' , 125000, 5, 1, "") ,('151', 'WHIPLASH-Orion', 'DZN' , 125000, 5, 1, ""),
-       ('071', 'Orion-SOCCER', 'PZA' , 125000, 5, 1, "") ,('161', 'CSAMOS-Orion', 'PZA' , 125000, 5, 1, "");
+insert into productos (cod_producto, nombre, descripcion, tipo_unidad, valor_unitario, calificacion_producto, descuento, comentarios)
+Values ('001', 'Orion-SHOCK', '','PZA' , 125000, 5, 1, ""), ('100', 'TREX-Orion', '', 'PZA' , 125000, 5, 1, ""),
+       ('011', 'Orion-GAMER', '', 'PZA' , 125000, 5, 1, "") ,('101', 'BLACK-Orion', '', 'KIT' , 125000, 5, 1, ""),
+       ('021', 'Orion-SHOOT', '', 'PZA' , 125000, 5, 1, "") ,('111', 'ORANGE-Orion', '', 'PZA' , 125000, 5, 1, ""),
+       ('031', 'Orion-KSIUS', '', 'KIT' , 125000, 5, 1, "") ,('121', 'SHOW-Orion', '', 'PZA' , 125000, 5, 1, ""),
+       ('041', 'Orion-MOON', '', 'PZA' , 125000, 5, 1, "") ,('131', 'WATER-Orion', '', 'PZA' , 125000, 5, 1, ""),
+       ('051', 'Orion-DREAM', '', 'PZA' , 125000, 5, 1, "") ,('141', 'SPLASH-Orion-SHOCK', '', 'PZA' , 125000, 5, 1, ""),
+       ('061', 'Orion-TEAM', '', 'PCK' , 125000, 5, 1, "") ,('151', 'WHIPLASH-Orion', '', 'DZN' , 125000, 5, 1, ""),
+       ('071', 'Orion-SOCCER', '', 'PZA' , 125000, 5, 1, "") ,('161', 'CSAMOS-Orion', '', 'PZA' , 125000, 5, 1, "");
     """)
 except Exception as e:
     print(e)
